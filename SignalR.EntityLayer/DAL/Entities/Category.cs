@@ -1,9 +1,14 @@
-﻿namespace SignalR.EntityLayer.DAL.Entities
+﻿using SignalR.API.DAL.Entities;
+
+namespace SignalR.EntityLayer.DAL.Entities
 {
     public class Category
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public bool Status { get; set; }
+
+        public List<Product> Products { get; set; }
+
     }
 }

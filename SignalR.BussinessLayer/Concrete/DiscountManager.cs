@@ -1,4 +1,5 @@
 ﻿using SignalR.BussinessLayer.Abstract;
+using SignalR.DataAccessLayer.Abstract;
 using SignalR.EntityLayer.DAL.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,36 +11,36 @@ namespace SignalR.BussinessLayer.Concrete
 {
     public class DiscountManager : IDiscountService
     { 
-        private readonly IDiscountService _discountService;
+      private readonly IDiscountDal _discountDal;
 
-        public DiscountManager(IDiscountService discountService)
+        public DiscountManager(IDiscountDal discountDal)
         {
-            _discountService = discountService;
+            _discountDal = discountDal;
         }
 
         public void TAdd(Discount entity)
         {
-           _discountService.TAdd(entity);
+           _discountDal.Add(entity);
         }
 
         public void TDelete(Discount entity)
         {
-         _discountService.TDelete(entity);
+         _discountDal.Delete(entity);
         }
 
         public Discount TGetById(int id)
         {
-           return _discountService.TGetById(id);
+           return _discountDal.GetById(id);
         }
 
         public List<Discount> TGetListAll()
         {
-            return _discountService.TGetListAll();
+            return _discountDal.GetListAll();
         }
 
         public void TUpdate(Discount entity)
         {
-           _discountService.TUpdate(entity);
+           _discountDal.Update(entity);
         }
     }
 }

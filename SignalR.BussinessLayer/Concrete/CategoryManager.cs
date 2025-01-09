@@ -1,11 +1,6 @@
 ﻿using SignalR.BussinessLayer.Abstract;
 using SignalR.DataAccessLayer.Abstract;
 using SignalR.EntityLayer.DAL.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SignalR.BussinessLayer.Concrete
 {
@@ -30,7 +25,7 @@ namespace SignalR.BussinessLayer.Concrete
 
         public Category TGetById(int id)
         {
-           _categorydal.GetById(id);
+          return _categorydal.GetById(id);
         }
 
         public List<Category> TGetListAll()

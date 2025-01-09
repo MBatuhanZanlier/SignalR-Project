@@ -1,53 +1,69 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.BussinessLayer.Abstract;
 using SignalR.DtoLayer.AboutDto;
+using SignalR.DtoLayer.AboutDto;
+using SignalR.EntityLayer.DAL.Entities;
 
 namespace SignalR.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class AboutsController : ControllerBase
-    { 
-        private readonly IAboutService _aboutService;
+    {
+        private readonly IAboutService _AboutService;
+        private readonly IMapper _mapper;
 
-        public AboutsController(IAboutService aboutService)
+        public AboutsController(IAboutService AboutService, IMapper mapper)
         {
-            _aboutService = aboutService;
+            _AboutService = AboutService;
+            _mapper = mapper;
         }
 
-        [HttpGet] 
+        [HttpGet]
         public IActionResult AboutList()
         {
-            var values= _aboutService.TGetListAll(); 
-            return Ok(values);
+            var value = _mapper.Map<List<ResultAboutDto>>(_AboutService.TGetListAll());
+            return Ok(value);
         }
-        [HttpPost] 
-        public IActionResult CreateAbout(CreateAboutDto createAboutDto)
+        [HttpPost]
+        public IActionResult CreateAbout(CreateAboutDto AboutDto)
         {
-            _aboutService.TAdd(createAboutDto);
-            return Ok("Başarıyla Eklendi");
+            _AboutService.TAdd(new About()
+            {
+                Description = AboutDto.Description,
+                ImageUrl = AboutDto.ImageUrl,
+                Title = AboutDto.Title,
+            });
+            return Ok("Kategori Eklendi");
+
         }
-        [HttpDelete] 
+        [HttpDelete]
         public IActionResult DeleteAbout(int id)
         {
-            var value=_aboutService.TGetById(id);    
-            _aboutService.TDelete(value);
-            return Ok("Başarıyla Silindi"); 
-
+            var value = _AboutService.TGetById(id);
+            _AboutService.TDelete(value);
+            return Ok("Başarıyla Silindi");
         }
-        [HttpPut] 
-        public IActionResult UpdateAbout(UpdateAboutDto updateAboutDto)
-        {
-            _aboutService.TUpdate(updateAboutDto);
-            return Ok("Hakkımda Alanı Güncellendi"); 
 
-        }
-        [HttpGet("{id}")] 
-        public IActionResult GetAbout(int id)  
+        [HttpGet("{id}")]
+        public IActionResult GetAbout(int id)
         {
-           var value= _aboutService.TGetById(id);
+            var value = _AboutService.TGetById(id);
             return Ok(value);
+        }
+        [HttpPut]
+        public IActionResult UpdateAbout(UpdateAboutDto AboutDto)
+        {
+            _AboutService.TUpdate(new About()
+            {
+                Id = AboutDto.Id,
+                Description = AboutDto.Description,
+                ImageUrl = AboutDto.ImageUrl,
+                Title = AboutDto.Title,
+            }); 
+            return Ok("Başarıyla Güncellendi");
         }
     }
 }

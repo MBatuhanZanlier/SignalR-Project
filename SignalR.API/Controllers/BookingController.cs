@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SignalR.BussinessLayer.Abstract;
 using SignalR.DtoLayer.BookingDto;
+using SignalR.EntityLayer.DAL.Entities;
 
 namespace SignalR.API.Controllers
 {
@@ -25,7 +25,15 @@ namespace SignalR.API.Controllers
         [HttpPost]
         public IActionResult CreateBooking(CreateBookingDto createBookingDto)
         {
-            _bookingService.TAdd(createBookingDto);
+            _bookingService.TAdd(new Booking
+            {
+               
+                Date = DateTime.Now,
+                Mail = createBookingDto.Mail,
+                Name = createBookingDto.Name,
+                PersonCount = createBookingDto.PersonCount,
+                Phone = createBookingDto.Phone
+            });
             return Ok("Rezervasyon Yapıldı");
         }
         [HttpDelete]
@@ -40,7 +48,16 @@ namespace SignalR.API.Controllers
         [HttpPut]
         public IActionResult UpdateBooking(UpdateBookingDto updateBookingDto)
         {
-            _bookingService.TUpdate(updateBookingDto);
+            _bookingService.TUpdate(new Booking()
+            {
+                Id = updateBookingDto.Id,
+                Date = DateTime.Now,
+                Mail = updateBookingDto.Mail,
+                Name = updateBookingDto.Name,
+                PersonCount = updateBookingDto.PersonCount,
+                Phone = updateBookingDto.Phone
+            });
+            return Ok("Başarıyla Güncellendi");
         }
 
         [HttpGet("{id}")]

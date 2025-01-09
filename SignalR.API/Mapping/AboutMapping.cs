@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using SignalR.API.DAL.Entities;
 using SignalR.DtoLayer.AboutDto;
+using SignalR.EntityLayer.DAL.Entities;
 
 namespace SignalR.API.Mapping
 {

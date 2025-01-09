@@ -35,7 +35,7 @@ namespace SignalR.BussinessLayer.Concrete
 
         public void TUpdate(SocialMedia entity)
         {
-           return _socialmedia.Update(entity);
+           _socialmedia.Update(entity);
         }
     }
 }

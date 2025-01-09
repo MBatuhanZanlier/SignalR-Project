@@ -1,4 +1,5 @@
 ﻿using SignalR.API.DAL.Entities;
+using SignalR.DtoLayer.ProductDto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,7 @@ namespace SignalR.BussinessLayer.Abstract
 {
     public interface IProductService:IGenericService<Product>
     {
+        public List<ResultProductWithCategoryDto> TGetProductsWithCategory();
+
     }
 }
