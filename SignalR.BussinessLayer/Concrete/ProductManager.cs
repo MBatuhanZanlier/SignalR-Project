@@ -15,27 +15,22 @@ namespace SignalR.BussinessLayer.Concrete
             _productdal = productdal;
             _mapper = mapper;
         }
-
         public void TAdd(Product entity)
         {
            _productdal.Add(entity);
         }
-
         public void TDelete(Product entity)
         { 
             _productdal.Delete(entity);
         }
-
         public Product TGetById(int id)
         {
            return _productdal.GetById(id);
         }
-
         public List<Product> TGetListAll()
         {
            return _productdal.GetListAll();
         }
-
         public List<ResultProductWithCategoryDto> TGetProductsWithCategory()
         {  
             var product=_productdal.GetProductsWithCategory();
@@ -43,7 +38,6 @@ namespace SignalR.BussinessLayer.Concrete
             return productDto;
             
         }
-
         public void TUpdate(Product entity)
         {
             _productdal.Update(entity);
